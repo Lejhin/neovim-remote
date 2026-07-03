@@ -1,5 +1,8 @@
 # neovim-remote
 
+> **ATTENTION**
+> This Plugin is my first exposure to the neovim plugin eco-system. Use on your own risk
+
 Mount remote directories via SSHFS and work on them as local files in Neovim. Open SSH terminals in floating windows that automatically connect and change to the remote directory.
 
 ## Requirements
