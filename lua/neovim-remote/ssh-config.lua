@@ -293,7 +293,7 @@ end
 
 function M.create_new_config(callback)
 	vim.ui.input({
-		prompt = "SSH alias name (e.g. 'homelab', 'server', 'pi'): ",
+		prompt = "SSH alias name: ",
 	}, function(alias_input)
 		local alias = M.sanitize_alias(alias_input or "")
 
@@ -310,7 +310,7 @@ function M.create_new_config(callback)
 		end
 
 		vim.ui.input({
-			prompt = "Remote host (e.g. 'user@192.168.1.100' or 'server.example.com'): ",
+			prompt = "Remote host: ",
 		}, function(remote_input)
 			remote_input = remote_input and vim.trim(remote_input) or ""
 

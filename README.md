@@ -144,6 +144,11 @@ fusermount3 -u ~/.local/share/nvim/neovim-remote/mounts/<hash>
 
 Ensure snacks.nvim is installed and the picker module is available.
 
+
+## Known Issues
+
+- [ ] if sshpass is not installed, ssh-config etnry is written into  ~/.ssh/config and private + public is generated without they public key being transfered to the server. (You either have to manually remove the keys + config entry or push the public key to the server by yourself)
+
 ## License
 
 APACHE 2.0
