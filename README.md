@@ -149,6 +149,8 @@ Ensure snacks.nvim is installed and the picker module is available.
 
 - [ ] if sshpass is not installed, ssh-config etnry is written into  ~/.ssh/config and private + public is generated without they public key being transfered to the server. (You either have to manually remove the keys + config entry or push the public key to the server by yourself)
 
+- [ ] No WSL support (a new terminal can't spawn on attach)
+
 ## License
 
 APACHE 2.0
