@@ -5,7 +5,7 @@
 > Use on your own risk, but it seems to work just fine for now
 
 > **Why its great**
-> You dont have to copy or install neovim on the server. Your config just works
+> You dont have to copy your config or install neovim on the server. Your config just works
 > like it is local. Just attach to your server via ssh or create ssh configs.
 > The keys + configs get generated without a headache and public key gets
 > transfered to the server. You only have to type in your password once during
