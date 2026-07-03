@@ -110,11 +110,11 @@ In terminal mode (`t`), `<Esc>` is mapped to `<C-\\><C-n>` to exit terminal inse
 
 | Command | Description |
 |---------|-------------|
-| `:RemoteTerminalOpen` | Open SSH terminal for current mount |
-| `:RemoteTerminalToggle` | Toggle SSH terminal (open/close) |
-| `:RemoteTerminalClose` | Hide SSH terminal |
-| `:RemoteTerminalShow` | Show hidden SSH terminal |
-| `:RemoteTerminalKill` | Kill SSH terminal process |
+| `:RemoteAttach` | Attach via picker |
+| `:RemoteClearAll` | Clear all mounted sessions |
+| `:RemoteDetach` | Clear 1 session from picker|
+| `:RemoteTerminalToggle` | toggle ssh terminal |
+| `:RemoteList` | List all currently mounted sessions|
 
 ## Usage
 
