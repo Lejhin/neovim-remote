@@ -2,6 +2,7 @@ local M = {}
 
 M.config = {
 	keymaps = {},
+	attachMode = "internal",
 }
 
 local state = require("neovim-remote.state")
@@ -12,6 +13,7 @@ local remote_terminal = require("neovim-remote.remote_terminal")
 
 function M.setup(opts)
 	M.config = vim.tbl_deep_extend("force", M.config, opts or {})
+	terminal.setup({ mode = M.config.attachMode })
 	state.init()
 
 	local augroup = vim.api.nvim_create_augroup("NeovimRemote", { clear = true })
@@ -107,19 +109,6 @@ function M.detach(hash)
 			end
 		end)
 	end)
-end
-
-function M.detach_from_current_session()
-	local cwd = vim.fn.getcwd()
-	local mount_base = vim.fn.stdpath("data") .. "/neovim-remote/mounts/"
-
-	if not vim.startswith(cwd, mount_base) then
-		vim.notify("Not in a remote mount.", vim.log.levels.INFO)
-		return
-	end
-
-	local hash = vim.fn.fnamemodify(cwd, ":t")
-	M.detach(hash)
 end
 
 function M.clear_all_sessions()
