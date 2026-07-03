@@ -1,16 +1,16 @@
 # neovim-remote
 
 > **ATTENTION**
-> This Plugin is my first exposure to the neovim plugin eco-system. Use on your own risk
-
+> This Plugin is my first exposure to the neovim plugin eco-system. 
+> Use on your own risk, but it seems to work just fine for now
 Mount remote directories via SSHFS and work on them as local files in Neovim. Open SSH terminals in floating windows that automatically connect and change to the remote directory.
 
 ## Requirements
 
 - Neovim >= 0.10
-- SSHFS in `$PATH`
-- SSH with key-based authentication (password prompts are not supported in floating terminals)
-- Optional: [snacks.nvim](https://github.com/folke/snacks.nvim) for external terminal opening
+- sshfs
+- ssh with key-based authentication (password prompts are not supported in floating terminals)
+- sshpass to send the generated ssh-key to the server for a smooth connection workflow
 
 ## Installation
 
@@ -77,8 +77,13 @@ require("neovim-remote").setup({
     toggle = { lhs = "<C-t>", mode = { "n", "t" } },
     detach = false,
   }
+  attachMode = "internal" | "external"
 })
 ```
+
+attachMode is a fix for WSL. internal changes saves the current workspace and changes internally while triggering
+the **snacks**.dashboard, if installed. The Mode "external" opens an entire new window, just like vscode.
+Default mode is internal. If you want an external window, feel free to change the config.
 
 ## Default Keymaps
 
@@ -106,7 +111,9 @@ In terminal mode (`t`), `<Esc>` is mapped to `<C-\\><C-n>` to exit terminal inse
 
 ### 1. Attach
 
-Press `<leader>ra` to open the picker. Select an SSH host or create a new one. Enter the remote path (absolute, e.g. `/home/user/project`). SSHFS mounts the directory and opens an external terminal in the mount point.
+Press `<leader>ra` to open the picker. Select an SSH host or create a new one.
+Enter the remote path (absolute, e.g. `/home/user/project`). SSHFS mounts the
+directory and changes directory to the mount point (or opens external terminal with neovim launched in the session-path)
 
 ### 2. Edit locally
 
@@ -120,37 +127,36 @@ Press `<leader>rt` inside a mounted directory. A floating window opens, connects
 
 Press `<leader>rd` to open the detach picker and select a mount to unmount. Press `<leader>rC` to unmount all sessions.
 
+### 5. List
+
+Press `<leader>tl`  to see a list of all mounted directories to get an overview 
+
 ## Troubleshooting
 
 **"Not in a remote mount"**
 
 You are not inside a mounted directory. Check active sessions with `<leader>rl`.
 
-**SSH hangs or password prompt**
-
-Remote terminals do not support interactive password input. Use SSH keys or ssh-agent.
-
 **Mount cannot be detached**
 
-```bash
-# Check active mounts
-mount | grep neovim-remote
+manually unmount the folders (make sure to delete the unmounted folder afterwards).
 
-# Manual unmount
-fusermount3 -u ~/.local/share/nvim/neovim-remote/mounts/<hash>
+```bash
+umount ~/.local/share/nvim/neovim-remote/mounts/<folder> 
+rm -rf <folder>
+
 ```
 
-**Picker is empty**
+**SSHPASS not installed**
 
-Ensure snacks.nvim is installed and the picker module is available.
+ssh-config entry is written into  ~/.ssh/config and private + public is
+generated without the public key being transfered to the server. 
 
+fixes: 
 
-## Known Issues
+- You have to manually remove the keys + config entry after installing sshpass and try again 
+- push the public key to the server by yourself
 
-- [ ] if sshpass is not installed, ssh-config etnry is written into  ~/.ssh/config and private + public is generated without they public key being transfered to the server. (You either have to manually remove the keys + config entry or push the public key to the server by yourself)
-
-- [ ] No WSL support (a new terminal can't spawn on attach)
-
-## License
+# License
 
 APACHE 2.0
