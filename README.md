@@ -89,9 +89,10 @@ require("neovim-remote").setup({
 })
 ```
 
-attachMode is a fix for WSL. internal changes saves the current workspace and changes internally while triggering
-the **snacks**.dashboard, if installed. The Mode "external" opens an entire new window, just like vscode.
-Default mode is internal. If you want an external window, feel free to change the config.
+attachMode is a fix for WSL. The mode "internal" saves the current workspace
+and changes directory internally while triggering
+the **snacks**.dashboard, if installed. The mode "external" opens an entire new window, just like vscode.
+Default mode is "internal". If you want an external window, feel free to change the config.
 
 ## Default Keymaps
 
